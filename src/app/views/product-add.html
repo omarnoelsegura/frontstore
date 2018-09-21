@@ -1,0 +1,31 @@
+<h3>{{titulo}}</h3>
+<hr/>
+
+<form #formProduct="ngForm" (ngSubmit)="onSubmit()" class="col-lg-6" id="form-product">
+    <label>
+        Codigo
+    </label>
+    <input type="text" #name="ngModel" name="code" [(ngModel)]="product.code" class="form-control" required/>
+    
+    <label>
+        Nombre
+    </label>
+    <input type="text" #username="ngModel" name="name" [(ngModel)]="product.name"  class="form-control" required/>
+
+    <label>
+        Descripcion
+    </label>
+    <input type="text" #username="ngModel" name="description" [(ngModel)]="product.description"  class="form-control" required/>
+    
+    <label>
+        Stock
+     </label>
+    <input type="text" #name="ngModel" name="stock" [(ngModel)]="product.stock" class="form-control" required/>
+
+
+    <br/>
+
+    <input type="submit" value="{{titulo}}" [disabled]="!formProduct.form.valid" class="btn btn-success"/>
+
+
+</form>

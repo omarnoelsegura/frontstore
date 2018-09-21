@@ -1,0 +1,41 @@
+<h3>{{titulo}}</h3>
+<hr>
+<div *ngIf="!products">
+    Cargando listado de productos ...
+</div>
+
+<table id="dtproducts" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead>
+      <tr>
+        <th>Codigo</th>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Imagen</th>
+        <th>Stock</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td> {{product.code}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.description}}</td>
+        <td><img [src]="product.imageUrl" height="42" width="42"></td>
+        <td>{{product.stock}}</td>
+        <td>
+          <div *ngIf="confirm != product.code">
+            <a [routerLink]="['/products',product.code]" class="btn btn-sm btn-primary">Ver</a>
+            <a [routerLink]="['/edit-product',product.code]" class="btn btn-sm btn-success">Actualizar Stock</a>
+            <a (click)="removeConfirm(product.code)"  class="btn btn-sm btn-danger">Borrar</a>
+          </div>  
+          
+          <div class="seguro" *ngIf="confirm == product.code">
+            <p>Estás seguro de borrar este producto?</p>
+            <a (click)="onDeleteProduct(product.code)"  class="btn btn-sm btn-secondary">Eliminar</a>
+            <a (click)="cancelConfirm()"  class="btn btn-sm btn-danger">Cancelar</a>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+    </table>
